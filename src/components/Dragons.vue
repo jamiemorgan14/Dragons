@@ -6,7 +6,7 @@
         <h5 class="card-title">{{dragonData.name}}</h5>
         <hr>
         <p class="card-text">HP: {{dragonData.currentHP}}</p>
-        <button @click="setActiveDragon(dragonData.id)" class="btn btn-primary">Choose Dragon</button>
+        <button @click="selectDragon(dragonData)" class="btn btn-primary">Choose Dragon</button>
       </div>
     </div>
   </div>
@@ -20,7 +20,11 @@
       return {}
     },
     computed: {},
-    methods: {},
+    methods: {
+      selectDragon(dragonData) {
+        this.$store.dispatch('changeActiveDragon', dragonData)
+      }
+    },
     components: {}
   }
 </script>

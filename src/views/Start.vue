@@ -11,7 +11,11 @@
           <champions v-for="champion in champions" :championData="champion" :key="champion.id"></champions>
         </div>
       </div>
-      <div class="col-5 offset-2">
+      <div class="col-2 text-center">
+        <button class="btn btn-outline-primary" v-if="activeChampion.name && activeDragon.name" @click="startGame()">Start
+          Game</button>
+      </div>
+      <div class="col-5">
         <div class="row">
           <dragons v-for="dragon in dragons" :dragonData="dragon" :key="dragon.id"></dragons>
         </div>
@@ -40,9 +44,23 @@
       },
       dragons() {
         return this.$store.state.dragons
+      },
+      activeChampion() {
+        return this.$store.state.activeChampion
+      },
+      activeDragon() {
+        return this.$store.state.activeDragon
       }
     },
-    methods: {},
+    methods: {
+      startGame() {
+        let data = {
+          dragonId: this.activeDragon.id,
+          championId: this.activeChampion.id
+        }
+        this.$store.dispatch('createGame', data)
+      }
+    },
     components: {
       Champions,
       Dragons

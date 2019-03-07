@@ -7,7 +7,7 @@
         <p class="card-text">Race: {{championData.race}}
           <br>Class: {{championData.class}}
           <hr>HP: {{championData.hp}}</p>
-        <button @click="Champion(championData.id)" class="btn btn-primary">Choose Champion</button>
+        <button @click="selectChampion(championData)" class="btn btn-primary">Choose Champion</button>
       </div>
     </div>
   </div>
@@ -22,7 +22,9 @@
     },
     computed: {},
     methods: {
-      ActiveChampion(id)
+      selectChampion(championData) {
+        this.$store.dispatch('changeActiveChampion', championData)
+      }
     },
     components: {}
   }

@@ -48,9 +48,11 @@ export default new Vuex.Store({
         })
     },
     getGame({ commit, dispatch }, payload) {
-      _api.get('game/' + payload)
+      _api.get('games/' + payload)
         .then(res => {
-          commit('activeGame', res.data)
+          commit('setActiveGame', res.data)
+          commit('setActiveChampion', res.data._champion)
+          commit('setActiveDragon', res.data._dragon)
         })
     },
     attack({ commit, dispatch }, payload) {
@@ -63,6 +65,8 @@ export default new Vuex.Store({
       _api.post('games', payload)
         .then(res => {
           commit('setActiveGame', res.data.game)
+          commit('setActiveChampion', res.data.game._champion)
+          commit('setActiveDragon', res.data.game._dragon)
           router.push({ name: 'Game', params: { id: res.data.game._id } })
         })
     },
